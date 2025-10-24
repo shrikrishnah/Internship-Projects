@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internships | VaultofCodes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #ff7e5f;
+            --accent: #6b5b95;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --text: #333;
+            --success: #2ecc71;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 30px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+
+        .tagline {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        /* Main Content */
+        main {
+            padding: 50px 0;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--dark);
+            font-size: 36px;
+            position: relative;
+        }
+
+        .page-title:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--secondary);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+
+        .internship-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .internship-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .internship-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.12);
+        }
+
+        .card-header {
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .card-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+
+        .card-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .card-subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .card-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-details {
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .detail-item {
+            display: flex;
+            margin-bottom: 12px;
+            align-items: flex-start;
+        }
+
+        .detail-icon {
+            color: var(--primary);
+            margin-right: 10px;
+            margin-top: 2px;
+            font-size: 16px;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--dark);
+            margin-right: 5px;
+        }
+
+        .detail-value {
+            color: #666;
+        }
+
+        .details-btn {
+            background: linear-gradient(to right, var(--secondary), #ff9a8b);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            display: block;
+            width: 100%;
+            font-size: 16px;
+            box-shadow: 0 4px 10px rgba(255, 126, 95, 0.3);
+        }
+
+        .details-btn:hover {
+            background: linear-gradient(to right, #ff6b4a, var(--secondary));
+            box-shadow: 0 6px 12px rgba(255, 126, 95, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Features Section */
+        .features-section {
+            background-color: white;
+            padding: 60px 0;
+            margin-top: 50px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--dark);
+            font-size: 28px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .feature-card {
+            background-color: var(--light);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border-left: 4px solid var(--primary);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .feature-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .feature-description {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: var(--secondary);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #bbb;
+            font-size: 14px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 12px;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+            animation: slideIn 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            padding: 20px 30px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover {
+            color: var(--secondary);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-details p {
+            margin-bottom: 15px;
+            display: flex;
+        }
+
+        .modal-details strong {
+            min-width: 120px;
+            color: var(--dark);
+        }
+
+        .apply-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: linear-gradient(to right, var(--secondary), #ff9a8b);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(255, 126, 95, 0.3);
+        }
+
+        .apply-link:hover {
+            background: linear-gradient(to right, #ff6b4a, var(--secondary));
+            box-shadow: 0 6px 12px rgba(255, 126, 95, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo {
+                margin-bottom: 15px;
+            }
+            
+            .internship-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-laptop-code"></i>
+                    <div>
+                        VaultofCodes
+                        <div class="tagline">Unlock Your Potential</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <h1 class="page-title">Internship Programs</h1>
+            
+            <div class="internship-grid">
+                <!-- Web Development Card -->
+                <div class="internship-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="card-title">Web Development</h3>
+                        <div class="card-subtitle">Build the future of the web</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-details">
+                            <div class="detail-item">
+                                <i class="fas fa-clock detail-icon"></i>
+                                <div>
+                                    <span class="detail-label">Duration:</span>
+                                    <span class="detail-value">1 month/2 months</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-map-marker-alt detail-icon"></i>
+                                <div>
+                                    <span class="detail-label">Location:</span>
+                                    <span class="detail-value">Virtual</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-money-bill-wave detail-icon"></i>
+                                <div>
+                                    <span class="detail-label">Stipend:</span>
+                                    <span class="detail-value">-</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-calendar-alt detail-icon"></i>
+                                <div>
+                                    <span class="detail-label">Start Date:</span>
+                                    <span class="detail-value">05/11/2023</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="details-btn" data-id="web">View Details</button>
+                    </div>
+                </div>
+
+                <!-- App Development Card -->
+                <div class="internship-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3 class="card-title">App Development</h3>
+                        <div class="card-subtitle">Create innovative mobile solutions</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-details">
+                            <div class="detail-item">
+                                <i class="fas fa-clock detail-icon"></i>
+                                <div>
+                                    <span class="detail-label">Duration:</span>
+                                    <span class="detail-value">1 month/2 months</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-map-marker-alt detail-icon"></i>
+                                <div>
+                                    <span class="detail-label">Location:</span>
+                                    <span class="detail-value">Virtual</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-money-bill-wave detail-icon"></i>
+                                <div>
+                                    <span class="detail-label">Stipend:</span>
+                                    <span class="detail-value">-</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-calendar-alt detail-icon"></i>
+                                <div>
+                                    <span class="detail-label">Start Date:</span>
+                                    <span class="detail-value">05/11/2023</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="details-btn" data-id="app">View Details</button>
+                    </div>
+                </div>
+
+                <!-- Python Programming Card -->
+                <div class="internship-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <h3 class="card-title">Python Programming</h3>
+                        <div class="card-subtitle">Master the versatile Python language</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-details">
+                            <div class="detail-item">
+                                <i class="fas fa-clock detail-icon"></i>
+                                <div>
+                                    <span class="detail-label">Duration:</span>
+                                    <span class="detail-value">1 month/2 months</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-map-marker-alt detail-icon"></i>
+                                <div>
+                                    <span class="detail-label">Location:</span>
+                                    <span class="detail-value">Virtual</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-money-bill-wave detail-icon"></i>
+                                <div>
+                                    <span class="detail-label">Stipend:</span>
+                                    <span class="detail-value">-</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-calendar-alt detail-icon"></i>
+                                <div>
+                                    <span class="detail-label">Start Date:</span>
+                                    <span class="detail-value">05/11/2023</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="details-btn" data-id="python">View Details</button>
+                    </div>
+                </div>
+
+                <!-- Java Programming Card -->
+                <div class="internship-card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fab fa-java"></i>
+                        </div>
+                        <h3 class="card-title">Java Programming</h3>
+                        <div class="card-subtitle">Build robust enterprise applications</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-details">
+                            <div class="detail-item">
+                                <i class="fas fa-clock detail-icon"></i>
+                                <div>
+                                    <span class="detail-label">Duration:</span>
+                                    <span class="detail-value">1 month/2 months</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-map-marker-alt detail-icon"></i>
+                                <div>
+                                    <span class="detail-label">Location:</span>
+                                    <span class="detail-value">Virtual</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-money-bill-wave detail-icon"></i>
+                                <div>
+                                    <span class="detail-label">Stipend:</span>
+                                    <span class="detail-value">-</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-calendar-alt detail-icon"></i>
+                                <div>
+                                    <span class="detail-label">Start Date:</span>
+                                    <span class="detail-value">05/11/2023</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="details-btn" data-id="java">View Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <div class="features-section">
+                <div class="container">
+                    <h2 class="section-title">Why Choose Our Internships</h2>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <h3 class="feature-title">Real-World Projects</h3>
+                            <p class="feature-description">Work on actual projects that companies need, not just theoretical exercises.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3 class="feature-title">Mentorship</h3>
+                            <p class="feature-description">Get guidance from industry professionals with years of experience.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <h3 class="feature-title">Certification</h3>
+                            <p class="feature-description">Earn a certificate that validates your skills to future employers.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <h3 class="feature-title">Career Opportunities</h3>
+                            <p class="feature-description">Top performers may receive job offers or referrals to partner companies.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>VaultofCodes</h3>
+                    <p>Unlocking potential through hands-on tech education and internship opportunities.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Programs</h3>
+                    <ul>
+                        <li><a href="#">Web Development</a></li>
+                        <li><a href="#">App Development</a></li>
+                        <li><a href="#">Python Programming</a></li>
+                        <li><a href="#">Java Programming</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> info@vaultofcodes.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Virtual Internships</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Follow Us</h3>
+                    <ul>
+                        <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fab fa-github"></i> GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 VaultofCodes. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal for Details -->
+    <div class="modal" id="detailsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-title">Internship Details</h2>
+                <span class="close-btn">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-details" id="modal-details">
+                    <!-- Details will be loaded here via JavaScript -->
+                </div>
+                <a href="#" class="apply-link">Apply Now</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Modal elements
+            const modal = document.getElementById('detailsModal');
+            const closeBtn = document.querySelector('.close-btn');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDetails = document.getElementById('modal-details');
+            
+            // Internship data
+            const internships = {
+                web: {
+                    title: 'Web Development Internship Program',
+                    details: `
+                        <p><strong>Duration:</strong> 1 month/2 months</p>
+                        <p><strong>Location:</strong> Virtual</p>
+                        <p><strong>Stipend:</strong> -</p>
+                        <p><strong>Start Date:</strong> 05/11/2023</p>
+                        <p><strong>Description:</strong> This internship provides hands-on experience in modern web development technologies including HTML, CSS, JavaScript, and popular frameworks. You'll work on real projects and build a portfolio of work.</p>
+                        <p><strong>Technologies:</strong> HTML5, CSS3, JavaScript, React, Node.js, MongoDB</p>
+                        <p><strong>Requirements:</strong> Basic knowledge of HTML, CSS, and JavaScript. Passion for learning and creating web applications.</p>
+                    `
+                },
+                app: {
+                    title: 'App Development Internship Program',
+                    details: `
+                        <p><strong>Duration:</strong> 1 month/2 months</p>
+                        <p><strong>Location:</strong> Virtual</p>
+                        <p><strong>Stipend:</strong> -</p>
+                        <p><strong>Start Date:</strong> 05/11/2023</p>
+                        <p><strong>Description:</strong> Learn to develop mobile applications for iOS and Android platforms. Work with modern development tools and frameworks to create functional and user-friendly apps.</p>
+                        <p><strong>Technologies:</strong> React Native, Flutter, Firebase, REST APIs</p>
+                        <p><strong>Requirements:</strong> Basic programming knowledge. Familiarity with any programming language is beneficial.</p>
+                    `
+                },
+                python: {
+                    title: 'Python Programming Internship Program',
+                    details: `
+                        <p><strong>Duration:</strong> 1 month/2 months</p>
+                        <p><strong>Location:</strong> Virtual</p>
+                        <p><strong>Stipend:</strong> -</p>
+                        <p><strong>Start Date:</strong> 05/11/2023</p>
+                        <p><strong>Description:</strong> Dive into Python programming with this comprehensive internship. Learn data structures, algorithms, and practical applications of Python in various domains.</p>
+                        <p><strong>Technologies:</strong> Python, Django, Flask, Pandas, NumPy</p>
+                        <p><strong>Requirements:</strong> Basic understanding of programming concepts. No prior Python experience required.</p>
+                    `
+                },
+                java: {
+                    title: 'Java Programming Internship Program',
+                    details: `
+                        <p><strong>Duration:</strong> 1 month/2 months</p>
+                        <p><strong>Location:</strong> Virtual</p>
+                        <p><strong>Stipend:</strong> -</p>
+                        <p><strong>Start Date:</strong> 05/11/2023</p>
+                        <p><strong>Description:</strong> Master Java programming with this intensive internship. Learn object-oriented programming, Java frameworks, and build real-world applications.</p>
+                        <p><strong>Technologies:</strong> Java, Spring Boot, Hibernate, Maven, JUnit</p>
+                        <p><strong>Requirements:</strong> Basic programming knowledge. Familiarity with any programming language is helpful.</p>
+                    `
+                }
+            };
+            
+            // Add event listeners to all detail buttons
+            const detailButtons = document.querySelectorAll('.details-btn');
+            detailButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const internshipId = this.getAttribute('data-id');
+                    showInternshipDetails(internshipId);
+                });
+            });
+            
+            // Add event listeners to cards for click
+            const cards = document.querySelectorAll('.internship-card');
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const internshipId = this.getAttribute('data-category');
+                    showInternshipDetails(internshipId);
+                });
+            });
+            
+            // Function to show internship details in modal
+            function showInternshipDetails(id) {
+                if (internships[id]) {
+                    modalTitle.textContent = internships[id].title;
+                    modalDetails.innerHTML = internships[id].details;
+                    modal.style.display = 'block';
+                }
+            }
+            
+            // Close modal when clicking the close button
+            closeBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            // Close modal when clicking outside the modal content
+            window.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
